@@ -3,8 +3,8 @@ package configuration
 import (
 	"encoding/json"
 	"io/ioutil"
-	"os"
 	Path "path"
+	Filepath "path/filepath"
 )
 
 type Geonames struct {
@@ -38,10 +38,8 @@ func New(path string) *Configuration {
 	}
 
 	// Temporary configurations
-	configuration.Temporary = &Temporary{}
-	tmpFolder, _ := ioutil.TempDir("", "geonames")
-	configuration.Temporary.Input = Path.Join(tmpFolder, "input")
-	os.Mkdir(configuration.Temporary.Input, 0755)
-
+	tmpPath := Filepath.Dir(path)
+	tmpPath = Path.Join(tmpPath, "tmp")
+	configuration.Temporary = &Temporary{tmpPath}
 	return configuration
 }

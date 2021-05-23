@@ -21,10 +21,6 @@ func DownloadCountries(di *Di.Di) []*os.File {
 	return countries
 }
 
-func purgeTemporaryFolder(folder string) {
-	os.RemoveAll(folder)
-}
-
 func downloadFile(url string, country string, folder string) *os.File {
 	filePath := path.Join(folder, country+".zip")
 	file, _ := os.Create(filePath)

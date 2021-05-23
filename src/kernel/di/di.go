@@ -13,8 +13,9 @@ type Di struct {
 func New() *Di {
 	path, _ := os.Getwd()
 	path = Path.Join(path, "../configuration.json")
+	configuration := Configuration.New(path)
 
 	return &Di{
-		Configuration.New(path),
+		configuration,
 	}
 }
