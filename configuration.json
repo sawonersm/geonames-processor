@@ -1,0 +1,8 @@
+{
+    "geonames": {
+        "url": "http://download.geonames.org/export/dump",
+        "countries": [
+            "ES"
+        ]
+    }
+}
