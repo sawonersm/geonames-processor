@@ -6,9 +6,8 @@ import (
 )
 
 type Geonames struct {
-	Url       string   `json:"url"`
-	Countries []string `json:"countries"`
-	Features  Features `json:"features"`
+	Country  Country  `json:"country"`
+	Features Features `json:"features"`
 }
 
 type Temporary struct {
@@ -18,6 +17,10 @@ type Temporary struct {
 type Configuration struct {
 	Temporary Temporary `json:"temporary"`
 	Geonames  Geonames  `json:"geonames"`
+}
+
+type Country struct {
+	Url string `json:"url"`
 }
 
 type Features struct {

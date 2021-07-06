@@ -6,9 +6,8 @@
         "features": {
             "url": "http://download.geonames.org/export/dump/featureCodes_en.txt"
         },
-        "url": "http://download.geonames.org/export/dump",
-        "countries": [
-            "ES"
-        ]
+        "country": {
+            "url": "http://download.geonames.org/export/dump"
+        }
     }
 }
