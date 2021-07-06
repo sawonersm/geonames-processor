@@ -2,30 +2,31 @@ package unzipper
 
 import (
 	"archive/zip"
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
-	"regexp"
-	Processable "sawonersm/geonames-processor/business/model/processable"
 )
 
-func UnzipCountry(processable *Processable.Processable) string {
-	var filename string
+func Unzip(path string) []string {
 
-	r, err := zip.OpenReader(processable.Filepath)
+	var files = []string{}
+	folder := filepath.Dir(path)
+
+	r, err := zip.OpenReader(path)
 	if err != nil {
 		panic(err)
 	}
 	defer r.Close()
 
-	for _, f := range r.File {
-		// Prevent readmes and kind of stuff
-		if !isUncompressedCountry(processable.Country.Code, f) {
-			continue
-		}
+	fmt.Println()
 
-		fpath := filepath.Join(processable.Path, f.Name)
-		filename = fpath
+	for _, f := range r.File {
+
+		fpath := filepath.Join(folder, f.Name)
+		filename := fpath
+
+		files = append(files, filename)
 
 		targetFile, err := os.OpenFile(fpath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, f.Mode())
 		if err != nil {
@@ -43,10 +44,5 @@ func UnzipCountry(processable *Processable.Processable) string {
 		sourceFile.Close()
 	}
 
-	return filename
-}
-
-func isUncompressedCountry(code string, file *zip.File) bool {
-	is, _ := regexp.Match(code+"(.*)", []byte(file.Name))
-	return is
+	return files
 }
