@@ -5,9 +5,9 @@ import (
 	"os"
 	Path "path"
 	"regexp"
+	Country "sawonersm/geonames-processor/business/model/country"
+	Processable "sawonersm/geonames-processor/business/model/processable"
 	Di "sawonersm/geonames-processor/kernel/di"
-	Country "sawonersm/geonames-processor/model/country"
-	Processable "sawonersm/geonames-processor/model/processable"
 )
 
 const (
@@ -15,7 +15,7 @@ const (
 )
 
 func Inspect(di *Di.Di) []*Processable.Processable {
-	files, err := ioutil.ReadDir(di.Configuration.Temporary.Input)
+	files, err := ioutil.ReadDir(di.Configuration.Temporary.Path)
 	if err != nil {
 		panic(err)
 	}
@@ -66,11 +66,11 @@ func getProcessableCountry(di *Di.Di, file os.FileInfo) *Processable.Processable
 
 	code := string(submatch[1])
 	filename := string(submatch[0])
-	filepath := Path.Join(di.Configuration.Temporary.Input, filename)
+	filepath := Path.Join(di.Configuration.Temporary.Path, filename)
 
 	return &Processable.Processable{
 		File:     filename,
-		Path:     di.Configuration.Temporary.Input,
+		Path:     di.Configuration.Temporary.Path,
 		Filepath: filepath,
 		Country: &Country.Country{
 			Code: code,

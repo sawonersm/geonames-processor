@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
-	Processable "sawonersm/geonames-processor/model/processable"
+	Processable "sawonersm/geonames-processor/business/model/processable"
 )
 
 func UnzipCountry(processable *Processable.Processable) string {

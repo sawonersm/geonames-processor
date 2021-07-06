@@ -1,5 +1,11 @@
 {
+    "temporary": {
+        "path": "/tmp"
+    },
     "geonames": {
+        "features": {
+            "url": "http://download.geonames.org/export/dump/featureCodes_en.txt"
+        },
         "url": "http://download.geonames.org/export/dump",
         "countries": [
             "ES"

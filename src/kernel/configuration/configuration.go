@@ -3,22 +3,25 @@ package configuration
 import (
 	"encoding/json"
 	"io/ioutil"
-	Path "path"
-	Filepath "path/filepath"
 )
 
 type Geonames struct {
 	Url       string   `json:"url"`
 	Countries []string `json:"countries"`
+	Features  Features `json:"features"`
 }
 
 type Temporary struct {
-	Input string
+	Path string `json:"path"`
 }
 
 type Configuration struct {
-	Temporary *Temporary
-	Geonames  Geonames `json:"geonames"`
+	Temporary Temporary `json:"temporary"`
+	Geonames  Geonames  `json:"geonames"`
+}
+
+type Features struct {
+	Url string `json:"url"`
 }
 
 func New(path string) *Configuration {
@@ -37,9 +40,5 @@ func New(path string) *Configuration {
 		panic(err)
 	}
 
-	// Temporary configurations
-	tmpPath := Filepath.Dir(path)
-	tmpPath = Path.Join(tmpPath, "tmp")
-	configuration.Temporary = &Temporary{tmpPath}
 	return configuration
 }

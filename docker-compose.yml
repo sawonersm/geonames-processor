@@ -12,7 +12,8 @@ services:
         volumes:
             - './docker/db/sql:/docker-entrypoint-initdb.d'
         networks: 
-            - network_api
+            network_api:
+                ipv4_address: 10.0.0.2
 
     processor:
         tty: true
@@ -20,6 +21,16 @@ services:
         build:
             context: ./docker/processor
         volumes:
-            - "./src:/processor"
+            - ".:/processor"
         depends_on:
             - db
+        networks: 
+            network_api:
+                ipv4_address: 10.0.0.3
+
+networks:
+    network_api:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 10.0.0.0/16
