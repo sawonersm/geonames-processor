@@ -11,8 +11,8 @@ Database is structures in two tables:
 ### Features
 
 A feature is a way of classificate locations. It is composed by:
-    - class: It is a high level classification. Country, road, city, mountain ...
-    - code: It is a more specific aggrupation.
+- class: It is a high level classification. Country, road, city, mountain ...
+- code: It is a more specific aggrupation.
 
 For more information, please, visit the official [documentation](http://www.geonames.org/export/codes.html)
 
