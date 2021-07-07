@@ -1,4 +1,4 @@
-package features
+package country
 
 import (
 	"bufio"
@@ -6,14 +6,12 @@ import (
 	Model "sawonersm/geonames-processor/data/model"
 	FeatureRepository "sawonersm/geonames-processor/data/repository/feature"
 	Di "sawonersm/geonames-processor/kernel/di"
+	"strconv"
 	"strings"
 )
 
 func ProcessFile(di *Di.Di, path string) {
-	file, err := os.Open(path)
-	if err != nil {
-		panic(err)
-	}
+	file, _ := os.Open(path)
 
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
@@ -28,33 +26,27 @@ func ProcessFile(di *Di.Di, path string) {
 	for _, line := range lines {
 		processLine(di, line)
 	}
-
 }
 
 func processLine(di *Di.Di, line string) {
-	var feature *Model.Feature
 	parts := strings.Split(line, "\t")
 
-	joinedCode := parts[0]
-	if joinedCode == "null" {
+	featureCode := parts[7]
+	feature := FeatureRepository.GetByCode(di, featureCode)
+	if feature == nil {
 		return
 	}
 
-	codeParts := strings.Split(joinedCode, ".")
-	class := codeParts[0]
-	code := codeParts[1]
+	latitude, _ := strconv.ParseFloat(parts[4], 32)
+	longitude, _ := strconv.ParseFloat(parts[5], 32)
 
-	feature = FeatureRepository.GetByCode(di, code)
-	if feature != nil {
-		return
+	location := &Model.Location{
+		GeonameId: parts[0],
+		Name:      parts[1],
+		Feature:   feature.Id,
+		Latitude:  float32(latitude),
+		Longitude: float32(longitude),
 	}
 
-	feature = &Model.Feature{
-		Code:        code,
-		Class:       class,
-		Name:        parts[1], // Name
-		Description: parts[2], // Description
-	}
-
-	di.GetDb().GetConnection().Save(feature)
+	di.GetDb().GetConnection().Save(location)
 }

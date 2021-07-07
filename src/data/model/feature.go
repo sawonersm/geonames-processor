@@ -8,6 +8,7 @@ import (
 type Feature struct {
 	Id          uint `gorm:"primaryKey;autoIncrement"`
 	Code        string
+	Class       string
 	Name        string
 	Description string
 	CreatedAt   time.Time

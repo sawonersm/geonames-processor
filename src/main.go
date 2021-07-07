@@ -19,8 +19,7 @@ func main() {
 		Country.ProcessCompressedFile(di, file)
 		break
 	case Mode.FEATURES:
-		file := "/tmp/ES.zip"
-		// file := Download.DownloadFeatures(di)
+		file := Download.DownloadFeatures(di)
 		Features.ProcessFile(di, file)
 		break
 	}
