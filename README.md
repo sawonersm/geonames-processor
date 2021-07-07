@@ -16,9 +16,34 @@ A feature is a way of classificate locations. It is composed by:
 
 For more information, please, visit the official [documentation](http://www.geonames.org/export/codes.html)
 
+```sql
+# Single result example
+id: 100
+class: H
+code: OCN
+name: ocean
+description: one of the major divisions of the vast expanse of salt water covering part of the earth
+created_at: 2021-07-07 08:18:24
+updated_at: 2021-07-07 08:18:24
+deleted_at: NULL
+```
+
 ### Locations
 
 A location is formed by an id, a feature, name and coordinates
+
+
+```sql
+# Single result example
+geoname_id: 10105996
+name: Las Palmeras
+latitude: 37.6865501
+longitude: -0.7360200
+feature: 348
+created_at: 2021-07-07 08:34:19
+updated_at: 2021-07-07 08:34:19
+deleted_at: NULL
+```
 
 ## How does it work
 
