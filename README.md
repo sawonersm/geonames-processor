@@ -56,3 +56,10 @@ Nowadays we can just import directly in database by choosing between features an
 # Import a country
 ~$ bin/processor country ES
 ```
+
+## Sponsor
+
+Thanks to LCApps for supporting this project
+
+![LCApps logo](./doc/asset/logo-lcapps.png)
+
